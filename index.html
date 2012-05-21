@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="lib/codemirror.css">
+		<link rel="stylesheet" type="text/css" href="jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script type="text/javascript" src="lib/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui-1.8.18.custom.min.js"></script> 
+		<script type="text/javascript" src="lib/codemirror.js"></script>		
+		<script src="mode/ntriples/ntriples.js"></script>
+		<title>
+			HXL Maker
+		</title>
+	</head>
+	<body>
+		<div class="ui-widget demo">
+			<h1 xml:lang="en" lang="en">
+				HXL Maker
+			</h1>
+			<p><!-- just to preload the "loading" GIF -->
+				<img src="loader.gif" alt="loading..." style="visibility:hidden" />
+			</p>
+			<p>
+				This interactive form lets you create a HXL file that complies with the <a href="http://hxl.humanitarianresponse.info/">Humanitarian eXchange Language</a> standard. Please start by providing some information about yourself. You can put in your name or the organisation you work for (preferably both). The tool will bring up existing people and organisations from our database. If you (or your organisation) are not there yet, simply put in the name.</p>
+				<label for="personreporting">Your name</label><br />
+				<input id="personreporting" size="80" /><br />
+				<label for="orgreporting">Your organisation</label><br />
+				<input id="orgreporting" size="80" /><br />
+				<!--<p>Please indicate whether the data you are going to report consists of primary or secondary data (or both), and provide a short description of the data collection process.</p>
+				<input type="checkbox" name="primary" id="primary" value="primary"> Contains primary data <input type="checkbox" name="secondary" id="secondary" value="secondary"> Contains secondary data<br /> -->
+				<label for="datacollection">Data collection procedure (please describe)</label><br />
+				<textarea id="datacollection" name="datacollection" cols="60" rows="3"></textarea>
+				<hr />
+				<p>Next, please choose what you want to report data about; the tool will automatically propose matching HXL classes. Try <em>project</em> or <em>organisation</em>, for example.
+			</p>
+		</div>
+		<div class="ui-widget demo" id="classSelector">
+			<label for="classes">Report data about a</label><br />
+			<input id="classes" size="80" />
+			<div class="ui-widget demo" id="resourcedescription">
+			</div>	
+			<div class="ui-widget demo" id="datainput" style="display:none">
+							<h2 id="datainput-h2"></h2>
+			<p>The following form fields guide you through the submisison process the data that you want to report. All fields are <em>optional</em>, so there is no need to fill in any fields that you do not have data for. Some of the fields may cross-reference other datasets. These are marked with the symbol&nbsp;<b>&infin;</b>. These fields come with a look-up function for existing data; if the data you want to refer to is not there yet, there is an option to create it. </p>
+			<div class="ui-widget demo" id="properties">
+				</div>
+			</div>
+		</div>
+
+		<div class="ui-widget demo" id="submit">
+			<h2>HXL File Preview</h2>
+			<p>A preview of the data you have entered in HXL (<a href="http://www.w3.org/2001/sw/RDFCore/ntriples/">N-Triples</a> notation).
+			<textarea id="hxlcode" name="hxlcode"></textarea>
+		</div>		
+		<div class="ui-widget demo" id="submit">
+			<form id="submitform" action ="http://83.169.33.54:8080/parliament/sparql" method="POST"  target="updateFrame" >
+				<input id="update" name="update" type="hidden" /><!-- we'll generate the sparql update query into here --> 
+				<input type="submit" id="submitHXL" value="Submit HXL File" disabled="disabled" /> 
+			</form>			 
+		</div>
+		<div class="ui-widget demo" id="confirmation" style="display:none"></div>
+		<iframe src="i.html" width="100%" height="100px" id='updateFrame' border="0" frameborder="0"></iframe>
+	<script>
+	// the CodeMirror stuff
+	var hxleditor = CodeMirror.fromTextArea(document.getElementById("hxlcode"), {
+   	  readOnly: "nocursor",
+	  onCursorActivity: function() {
+	    hxleditor.setLineClass(hlLine, null);
+	    hlLine = hxleditor.setLineClass(hxleditor.getCursor().line, "activeline");
+	  }
+	});
+	var hlLine = hxleditor.setLineClass(0, "activeline");
+	</script>
+	<script type="text/javascript" src="lib/hxlmaker.js"></script>
+	</body>
+</html>

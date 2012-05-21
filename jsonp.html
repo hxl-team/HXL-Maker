@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script>
+	
+	var endpoint = 	"http://data.uni-muenster.de/sparql";
+	var query = "SELECT * WHERE { ?a ?b ?c . } LIMIT 10";
+		
+	var queryUrl = "http://jsonp.lodum.de/?endpoint=" + endpoint + "&query=" + query;
+	
+	function getTableHeaders(headerVars) {
+	  var trHeaders = $("<tr></tr>");
+	  for(var i in headerVars) {
+	    trHeaders.append( $("<th>" + headerVars[i] + "</th>") );
+	  }
+	  return trHeaders;
+	}
+
+	function getTableRow(headerVars, rowData) {
+	  var tr = $("<tr></tr>");
+	  for(var i in headerVars) {
+	    tr.append(getTableCell(headerVars[i], rowData));
+	  }
+	  return tr;
+	}
+
+	function getTableCell(fieldName, rowData) {
+	  var td = $("<td></td>");
+	  var fieldData = rowData[fieldName];
+	  td.html(fieldData["value"]);
+	  return td;
+	}
+	
+	$.ajax({
+	  dataType: "jsonp",
+	  url: queryUrl,
+	  success: function(data) {    
+	    // get the table element
+	    var table = $("#results");              
+
+	    // get the sparql variables from the 'head' of the data.
+	    var headerVars = data.head.vars; 
+
+	    // using the vars, make some table headers and add them to the table;
+	    var trHeaders = getTableHeaders(headerVars);
+	    table.append(trHeaders);  
+
+	    // grab the actual results from the data.                                          
+	    var bindings = data.results.bindings;
+
+	    // for each result, make a table row and add it to the table.
+	    for(rowIdx in bindings){
+	      table.append(getTableRow(headerVars, bindings[rowIdx]));
+	    } 
+	  }
+	});
+	
+		</script>
+	
+  	<title>HXL Maker</title>
+</head>
+
+<body>
+
+<table id="results"></table> 
+
+</body>
+</html>
