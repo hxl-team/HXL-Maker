@@ -1,0 +1,194 @@
+body {
+	background: white fixed no-repeat left top;
+	color: black;
+	font-family: sans-serif;
+	line-height: 1.8em;
+	margin: 0 auto;
+	width: 680px;
+}
+
+a {
+  background-color: transparent;
+}
+
+a:link {
+  color: #00c;
+}
+
+a:visited {
+  color: #609
+}
+
+a:active {
+  color: #c00
+}
+
+a:link img, a:visited img {
+  border: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  background: white;
+  color: #005a9c;
+  font-weight: normal;
+  text-align: left;
+}
+
+h1 {
+  clear: both;
+  font-size: 240%;
+line-height: 100%;
+  margin-top: 2em
+}
+
+h2 {
+  margin-top: 2em;
+  font-size: 170%;
+}
+
+h3 {
+  font-size: 140%;
+  margin-top: 2.5em;
+}
+
+h4 {
+  font-size: 120%;
+  margin: 2em 0 0.5em;
+}
+
+.hide {
+  display: none
+}
+
+pre {
+  background-color: #ffec8b;
+  color: black;
+  font-family: monospace;
+  line-height: 1.5em;
+  padding: 1.5em 2em;
+}
+
+pre strong {
+  color: #a00;
+  font-weight: bold;
+}
+
+dt {
+  font-weight: bold;
+  margin: 1em 0 0 0;
+}
+
+dd {
+  margin: 0 0 0 3em;
+}
+
+span#resourceuri, code, tt {
+  font-family: monospace
+}
+
+ul.toc {
+  list-style-type: none
+}
+
+
+h1, h2, h3 {
+  	stress: 20; 
+	richness: 90
+}
+
+dt {
+  pause-before: 20%
+}
+
+pre {
+  speak-punctuation: code;
+}
+
+img{
+	max-width:900px;
+}
+
+table { 
+	width: 900px;
+}
+
+th, td{
+	text-align: left; 
+	background: lightgrey;
+	padding: 0 3px;
+}
+
+th{
+	width: 200px;
+}
+
+div.index{
+	padding: 5px; 
+	border: dotted; 
+	background-color: #ddd;
+}
+
+div#doc-link{
+	position: fixed;
+	right: 50px;
+	top: 0px;
+	z-index: 5;
+	background-color: #005a9c;
+	padding: 5px 10px;
+}
+
+div#doc-link a {
+	color: white;
+	text-decoration: none;
+}
+
+p.intro{
+	clear:both;
+	padding-top: 15p;
+}
+
+p.intro img{
+	margin-left: 25px;
+}
+
+input{
+	margin-bottom: 30px;
+}
+
+input.loading{
+	background: url('loader.gif') no-repeat right center ;
+}
+
+input.noresults{
+	color: red;
+}
+
+div.loading {
+	background: url('loader.gif') no-repeat left top ;
+}
+
+label{
+	margin-top: 100px;
+}
+
+.demo p{
+	font-size: 16px;
+}
+
+small{
+	font-size: 14px;
+	line-height: 15px;
+	margin: 0;
+	padding: 0;
+	color: #7F7F7F;
+}
+
+.CodeMirror{
+	border: 1px solid #7F7F7F;
+}
+
+#confirmation{
+	border:  3px solid green;
+	padding: 10px;
+}
+
